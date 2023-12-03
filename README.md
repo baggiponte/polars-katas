@@ -72,6 +72,6 @@ import polars as pl
 
 url = urls[0]
 
-pl.read_parquet(0).head()
+pl.read_parquet(url).head()
 ```
 </details>
