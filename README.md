@@ -1,4 +1,14 @@
-# Polars Katas
+<h1 align="center">Polars Katas</h1>
+
+<div align="center">
+    <i>
+        In data's embrace,<br>
+        Polars' dance, a swift, fine art,<br>
+        Mastery's soft grace.
+    </i>
+</div>
+
+---
 
 ![polar-youngling](./public/polars-katas.png)
 
