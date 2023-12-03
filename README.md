@@ -14,7 +14,7 @@
 
 ## 🍱 Preparations for this journey
 
-1. Install [`PDM`](https://pdm-project.org/latest/#recommended-installation-method) or any other PEP-517 PEP-518 compliant package manger.
+1. Install [`PDM`](https://pdm-project.org/latest/#recommended-installation-method) or any other PEP-517 PEP-518 compliant package manger (basically, not `poetry`).
 
 > **Note**
 >
@@ -27,7 +27,7 @@
 pipx install pdm
 ```
 
-2. Install dependencies
+2. Install the dependencies
 
 ```bash
 # basically, just installs polars
@@ -37,14 +37,7 @@ pdm install
 pdm install -G ide
 ```
 
-3. Run the notebooks
-
-
-## Let's get some data
-
-We'll use the NYC Taxi dataset. We can get the links of the data from February to September 2023 only, since they have the same format.
-
-The source is [here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+3. Launch an IDE, a REPL or a Jupyter notebook to run the katas. Execute the following cell to import Polars and a list of URLs that contain the data. We'll use the NYC Taxi dataset. We can get the links of the data from February to September 2023 only, since they have the same format. The source is [here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
 
 ```python
 import polars as pl
