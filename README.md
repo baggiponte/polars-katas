@@ -68,3 +68,30 @@ url = urls[0]
 pl.read_parquet(url).head()
 ```
 </details>
+
+### Kata 2: Lazy mode
+
+Repeat the exercise above, using `pl.scan_parquet` instead. What happens if you run the code? What changes if you scan the whole set of URLs?
+
+Write the code to materialize the result.
+
+<details>
+<summary>Solution</summary>
+
+```python
+pl.scan_parquet(url).head().collect()
+
+pl.scan_parquet(urls).head()
+```
+</details>
+
+```python
+import polars as pl
+
+url = urls[0]
+
+pl.scan_parquet(0).head().collect()
+```
+</details>
+
+
