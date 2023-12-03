@@ -47,12 +47,12 @@ We'll use the NYC Taxi dataset. We can get the links of the data from February t
 The source is [here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
 
 ```python
+import polars as pl
+
 base = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-{:02d}.parquet"
 
 # we keep the files from Feb 2023 to retain those with the same schema
 urls = tuple(base.format(month) for month in range(2, 10))
-
-urls
 ```
 
 ## White Belt: Reading Data
