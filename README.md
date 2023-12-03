@@ -1,4 +1,4 @@
-<h1 align="center">Polars Katas</h1>
+<h1 align="center">🐻‍❄️ Polars Katas</h1>
 
 <div align="center">
     <i>
@@ -12,7 +12,7 @@
 
 ![polar-youngling](./public/polars-katas.png)
 
-## Get started
+## 🍱 Preparations for this journey
 
 1. Install [`PDM`](https://pdm-project.org/latest/#recommended-installation-method) or any other PEP-517 PEP-518 compliant package manger.
 
