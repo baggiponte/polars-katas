@@ -100,6 +100,41 @@ data = pl.scan_parquet(urls)
 data.schema
 ```
 </details>
+
+### Kata 4: Selecting columns
+
+Use `pl.select()` context to get the following columns:
+
+1. Select all columns
+2. Select all columns except `VendorID`.
+3. Select all columns that contain `amount` in their name
+4. Select all `Int64` columns.
+5. Select all `Int64` and `Int32` columns.
+5. Select all numeric columns.
+6. Select all datetime and string columns, minus the first column.
+
+<details>
+<summary>Solution</summary>
+
+```python
+data = pl.scan_parquet(urls)
+
+# 1. Select all columns
+data.select(pl.all())
+data.select("*")
+# 2. Select all columns except `VendorID`.
+data.select(pl.all().except("VendorID"))
+# 3. Select all columns that contain `amount` in their name
+data.select(pl.col(r"^*amount$"))
+# 4. Select all integer columns.
+data.select(pl.col(pl.Int64))
+# 5. Select all numeric columns.
+data.select(pl.col(pl.NUMERIC_DTYPES))
+# 6. Select all datetime and string columns.
+data.select(pl.col(pl.DateTime), pl.col(pl.Utf8))
+```
+</details>
+
 ```python
 import polars as pl
 
