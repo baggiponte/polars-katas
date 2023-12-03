@@ -85,6 +85,21 @@ pl.scan_parquet(urls).head()
 ```
 </details>
 
+### Kata 3: The schema
+
+Display the `LazyFrame` schema.
+
+Like `pandas`, `Polars` can `describe` the dataset. Can you do that on a `LazyFrame`?
+
+<details>
+<summary>Solution</summary>
+
+```python
+data = pl.scan_parquet(urls)
+
+data.schema
+```
+</details>
 ```python
 import polars as pl
 
