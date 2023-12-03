@@ -12,7 +12,7 @@
 
 ![polar-youngling](./public/polars-katas.png)
 
-## 🍱 Preparations for this journey
+## 🍱 Preparations for this Journey
 
 1. Install [`PDM`](https://pdm-project.org/latest/#recommended-installation-method) or any other PEP-517 PEP-518 compliant package manger (basically, not `poetry`).
 
@@ -48,9 +48,7 @@ base = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-{:0
 urls = tuple(base.format(month) for month in range(2, 10))
 ```
 
-## White Belt: Reading Data
-
-### Kata 1: Eager Mode
+## Kata 1: Eager Mode
 
 * Read the first parquet file in the list using `pl.read_parquet`.
 * Display the top five rows.
@@ -69,7 +67,7 @@ pl.read_parquet(url).head()
 ```
 </details>
 
-### Kata 2: Lazy mode
+## Kata 2: Lazy mode
 
 Repeat the exercise above, using `pl.scan_parquet` instead. What happens if you run the code? What changes if you scan the whole set of URLs?
 
@@ -85,7 +83,7 @@ pl.scan_parquet(urls).head()
 ```
 </details>
 
-### Kata 3: The schema
+## Kata 3: The schema
 
 Display the `LazyFrame` schema.
 
@@ -101,7 +99,7 @@ data.schema
 ```
 </details>
 
-### Kata 4: Selecting columns
+## Kata 4: Selecting columns
 
 Use `pl.select()` context to get the following columns:
 
