@@ -133,6 +133,43 @@ data.select(pl.col(pl.DateTime), pl.col(pl.Utf8))
 ```
 </details>
 
+## Kata 5: Column Selectors
+
+Use `selectors` to implement the previous selections, and the following ones:
+
+7. Select all columns that are integers or datetime, except the first one.
+8. Select all columns that contain an "ID" or "amount" and are not floating point numbers.
+
+```python
+import polars.selectors as cs
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+
+# 1. Select all columns
+data.select(cs.all())
+# 2. Select all columns except `VendorID`.
+data.select(~cs.by_name("VendorID"))
+# 3. Select all columns that contain `amount` in their name
+data.select(cs.contains("amount"))
+data.select(cs.matches("*amount"))
+# 4. Select all integer columns.
+data.select(cs.integer())
+# 5. Select all numeric columns.
+data.select(cs.numeric())
+# 6. Select all datetime and string columns.
+data.select(cs.temporal(), cs.string())
+data.select(cs.temporal() | cs.string())
+# 7. Select all columns that are integers or datetime, except the first one.
+data.select(cs.integer() - cs.first() | cs.temporal())
+# 8. Select all columns that contain an "ID" or "amount" and are not floating point numbers.
+data.select(cs.contains(("ID", "Amount")) | ~cs.float())
+```
+</details>
+
 ```python
 import polars as pl
 
