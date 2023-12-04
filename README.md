@@ -323,7 +323,8 @@ data.with_columns(
 You can change the memory representation of a numeric datatype with `.cast()`.
 
 1. Cast the string column into a categorical.
-1. Cast the integer columns to have the smallest memory footprint.
+2. Cast the integer columns to have the smallest memory footprint.
+3. Cast the datetime columns to milliseconds.
 
 <details>
 <summary>solution</summary>
