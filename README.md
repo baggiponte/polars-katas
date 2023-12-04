@@ -214,4 +214,22 @@ data.with_columns(percentage_change).explain(optimized=True)
 ```
 </details>
 
+### Kata 8: Chaining multiple contextes
+
+Try to write the expressions in the sixth kata in the same `with_column` context. Do you notice any errors popping up? Can you explain them?
+
+Call `explain` on both and compare the query plans.
+
+<details>
+<summary>Solution</summary>
+
+```python
+data.with_columns(
+    pl.col("trip_distance").mul(1000).name.suffix("_meters"),
+    pl.col("tolls_amount").add(pl.col("Airport_fee")).alias("total_fees"),
+).with_columns(
+    pl.col("tip_amount", "total_fees", "mta_tax", "fare_amount").truediv(pl.col("total_amount")).name.suffix("_pct")
+).explain()
+```
+</details>
 
