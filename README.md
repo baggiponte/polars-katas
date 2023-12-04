@@ -170,12 +170,47 @@ data.select(cs.contains(("ID", "Amount")) | ~cs.float())
 ```
 </details>
 
+### Kata 6: Introduction to expressions
+
+We already used expressions, such as `pl.col()` or `pl.all()`. These operations, that start with `pl.`, can only be evaluated inside a context.
+Outside of one, they can be assigned to a variable or be used as return value of a function and still retain all query optimisations.
+
+1. Multiply the `trip_distance` by 1000 to cast it in metres and name it `trip_distance_meters`.
+2. Add `tolls_amount`, `Airport_fee` and name it `total_fees`.
+3. Compute the ratio between `tip`, `total_fees`, `mta_tax` and `fare_amount` over `total_amount`.
+
+> **Hint**. You can call `.alias` on an expression to rename the column it generates. Similarly, you can access the `.name.suffix` method to add a suffix. Alternatively, you can name the column using a kwarg notation (i.e., `col=pl.some.expr`).
+
+<details>
+<summary>Solution</summary>
+
 ```python
-import polars as pl
+# 1. Multiply the `trip_distance` by 1000 to cast it in metres.
+data.with_columns(trip_distance_meters = pl.col("trip_distance") * 1000)
+data.with_columns(pl.col("trip_distance").mul(1000).alias("trip_distance_meters"))
+data.with_columns(pl.col("trip_distance").mul(1000).name.suffix("_meters"))
+# 2. Add `tolls_amount`, `Airport_fee` and name it `total_fees`.
+data.with_columns(total_fees=pl.col("tolls_amount") + pl.col("Airport_fee")))
+# 3. Compute the ratio between `tip`, `mta_tax` and `fare_amount` over `total_amount`.
+data.with_columns(pl.col("tip", "mta_tax", "fare_amount").truediv("total_amount").name.suffix("_pct"))
+```
+</details>
 
-url = urls[0]
+### Kata 7: The query plan
 
-pl.scan_parquet(0).head().collect()
+The `LazyFrame` represents a *Logical Plan*, i.e. a sequence of transformations. It embodies a query, rather than a `DataFrame`. You can inspect this plan when you print the `repr` of the `LazyFrame`.
+
+* What method does it suggest to call, to inspect the optimized plan?
+* Inspect the plan of the last exercise of the previous kata, comparing the optimised and unoptimised queries.
+* If you have `graphviz` on your `$PATH`, do the same with `data.show_graph`.
+
+<details>
+<summary>Solution</summary>
+
+```python
+percentage_change = pl.col("tip", "mta_tax", "fare_amount").truediv("total_amount").with_suffix("_pct")
+data.with_columns(percentage_change).explain(optimized=True)
+data.with_columns(percentage_change).explain(optimized=True)
 ```
 </details>
 
