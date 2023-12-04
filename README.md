@@ -50,7 +50,7 @@ urls = tuple(base.format(month) for month in range(2, 10))
 
 4. Get the weather data
 
-Data can be retrieved from `./data/weather.csv`, or through this script:
+Weather data was obtained via [OpenMeteo](https://open-meteo.com/en/docs/historical-weather-api#latitude=40.7143&longitude=-74.006&start_date=2023-02-01&end_date=2023-11-30&hourly=temperature_2m,relative_humidity_2m,precipitation,rain,snowfall,snow_depth,weather_code,wind_speed_10m,wind_speed_100m). Data can be retrieved from `./data/weather.csv`, or through this script:
 
 <details>
 
