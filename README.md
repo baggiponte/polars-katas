@@ -180,6 +180,9 @@ Outside of one, they can be assigned to a variable or be used as return value of
 1. Multiply the `trip_distance` by 1000 to cast it in metres and name it `trip_distance_meters`.
 2. Add `tolls_amount`, `Airport_fee` and name it `total_fees`.
 3. Compute the ratio between `tip`, `total_fees`, `mta_tax` and `fare_amount` over `total_amount`.
+4. Compute the average trip distance.
+5. Count the different values of `passenger_count`.
+6. Get the number of unique values of `VendorID` and `RatecodeID`.
 
 > **Hint**. You can call `.alias` on an expression to rename the column it generates. Similarly, you can access the `.name.suffix` method to add a suffix. Alternatively, you can name the column using a kwarg notation (i.e., `col=pl.some.expr`).
 
@@ -195,6 +198,12 @@ data.with_columns(pl.col("trip_distance").mul(1000).name.suffix("_meters"))
 data.with_columns(total_fees=pl.col("tolls_amount") + pl.col("Airport_fee")))
 # 3. Compute the ratio between `tip`, `mta_tax` and `fare_amount` over `total_amount`.
 data.with_columns(pl.col("tip", "mta_tax", "fare_amount").truediv("total_amount").name.suffix("_pct"))
+# 4. Compute the average trip distance.
+data.with_columns(pl.col("trip_distance").mean())
+# 5. Count the unique values of `passenger_count`.
+data.with_columns(pl.col("passenger_count").value_counts())
+# 6. Get the unique values of `VendorID` and `RatecodeID`.
+data.with_columns(pl.col("VendorID", "RatecodeID").n_unique())
 ```
 </details>
 
