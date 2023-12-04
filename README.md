@@ -111,6 +111,8 @@ Use `pl.select()` context to get the following columns:
 5. Select all numeric columns.
 6. Select all datetime and string columns, minus the first column.
 
+> **Hint**. To inspect the intermediate steps or results of a query, you can always call the `fetch()` method. It is like a debug statement.
+
 <details>
 <summary>Solution</summary>
 
