@@ -254,3 +254,32 @@ data.select(
 ```
 </details>
 
+## Kata 10: Namespaces
+
+Polars segregates operations on similar data types behind namespaces, e.g. `str`, `dt`, `list` and `struct`.
+
+1. Cast the `store_and_fwd_flag` column to lowercase.
+2. Extract the year, month and day of the temporal columns.
+3. Cast the temporal columns to strings.
+  1. Split them at the ` ` (space) mark
+  2. Take the first element
+  3. Split the element at the `-` mark.
+  4. Cast the result into a struct.
+  5. Cast the struct into a JSON string with.
+
+<details>
+<summary>solution</summary>
+
+```python
+data.select(
+    cs.temporal().as_expr()
+    .cast(pl.Utf8)
+    .str.split(" ")
+    .list.first()
+    .str.split("-")
+    .list.to_struct()
+    .struct.json_encode()
+).fetch()
+```
+</details>
+
