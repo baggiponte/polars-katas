@@ -56,7 +56,7 @@ urls = tuple(base.format(month) for month in range(2, 10))
 How long does this take?
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 import polars as pl
@@ -74,7 +74,7 @@ Repeat the exercise above, using `pl.scan_parquet` instead. What happens if you 
 Write the code to materialize the result.
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 pl.scan_parquet(url).head().collect()
@@ -90,7 +90,7 @@ Display the `LazyFrame` schema.
 Like `pandas`, `Polars` can `describe` the dataset. Can you do that on a `LazyFrame`?
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 data = pl.scan_parquet(urls)
@@ -114,7 +114,7 @@ Use `pl.select()` context to get the following columns:
 > **Hint**. To inspect the intermediate steps or results of a query, you can always call the `fetch()` method. It is like a debug statement.
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 data = pl.scan_parquet(urls)
@@ -147,7 +147,7 @@ import polars.selectors as cs
 ```
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 
@@ -184,7 +184,7 @@ Outside of one, they can be assigned to a variable or be used as return value of
 > **Hint**. You can call `.alias` on an expression to rename the column it generates. Similarly, you can access the `.name.suffix` method to add a suffix. Alternatively, you can name the column using a kwarg notation (i.e., `col=pl.some.expr`).
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 # 1. Multiply the `trip_distance` by 1000 to cast it in metres.
@@ -207,7 +207,7 @@ The `LazyFrame` represents a *Logical Plan*, i.e. a sequence of transformations.
 * If you have `graphviz` on your `$PATH`, do the same with `data.show_graph`.
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 percentage_change = pl.col("tip", "mta_tax", "fare_amount").truediv("total_amount").with_suffix("_pct")
@@ -223,7 +223,7 @@ Try to write the expressions in the sixth kata in the same `with_column` context
 Call `explain` on both and compare the query plans.
 
 <details>
-<summary>Solution</summary>
+<summary>🔎 Solution</summary>
 
 ```python
 data.with_columns(
