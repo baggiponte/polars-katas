@@ -235,3 +235,22 @@ data.with_columns(
 ```
 </details>
 
+## Kata 9: Data types
+
+You can change the memory representation of a numeric datatype with `.cast()`.
+
+1. Cast the string column into a categorical.
+1. Cast the integer columns to have the smallest memory footprint.
+
+<details>
+<summary>solution</summary>
+
+```python
+data.select(
+    cs.temporal().as_expr().cast(pl.Date),
+    cs.string().as_expr().cast(pl.Categorical),
+    cs.numeric().shrink_dtype()
+)
+```
+</details>
+
