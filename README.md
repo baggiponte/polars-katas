@@ -292,3 +292,38 @@ data.select(
 ```
 </details>
 
+## Kata 10: Filtering
+
+Filtering, combined with the query optimiser, can translate in huge gains. Thanks to the so-called "predicate pushdown", query engines can scan parquet files to just read the required rows - thus saving bandwidth and I/O.
+
+Filtering is done inside the `filter` context and uses basic Python logical operators. Perform the following filtering operations:
+
+1. Passenger count is greater than 3.
+2. The dropoff hour is the same as the pickup's.
+2. Trip distance is greater than the average trip distance.
+
+<details>
+<summary>solution</summary>
+
+```python
+
+```
+</details>
+
+## Kata 11: Aggregations
+
+Aggregations with `group_by` can be elegantly expressed in Polars. An aggregation looks like this: `data.group_by(...).agg(...)`. Inside the brackets, there can be any expression!
+
+1. Aggregate by passenger count and compute the average and standard deviation of the trip distance.
+2. Aggregate by month and compute the mean and standard deviation of the total price and trip distance.
+3. Take the logs (base 10) of the price and round it to the nearest tenth. Use this to aggregate by price order of magnitude and compute the average and standard deviation of passengers and trip distance.
+4. Aggregate by vendor ID and just write `"passenger_count` inside the `.agg` context. What happens?
+
+<details>
+<summary>solution</summary>
+
+```python
+
+```
+</details>
+
