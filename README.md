@@ -445,3 +445,22 @@ Repeat the join above but use the join-asof.
 ```
 </details>
 
+## Kata 15: Manipulating the elements of a list
+
+Aggregate the data by vendor and passenger count on trip distance and fare amount. Compute the rolling mean of size 3 over the elements of the list.
+
+<details>
+<summary>solution</summary>
+
+```python
+(
+    data
+    .group_by("VendorID", "passenger_count")
+    .agg("trip_distance", "fare_amount")
+    .with_columns(
+        pl.col("trip_distance").list.eval(pl.element().rolling_mean(window_size=3))
+    )
+)
+```
+</details>
+
