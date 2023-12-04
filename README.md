@@ -402,3 +402,46 @@ Aggregations with `group_by` can be elegantly expressed in Polars. An aggregatio
 ```
 </details>
 
+## Kata 12: Window Functions
+
+Window functions can be powerful allies to generate features. This are especially hard with pandas, since they would require creating a new dataframe and performing a join.
+
+Window functions are just computed as this: `pl.col(...).mean().over(...)`. They are especially useful for time-based data. For those cases, you can use the powerful `Expr.rolling()` to perform rolling window computations across datetime columns.
+
+1. Compute the mean and standard deviation of the price over vendor ID and passenger count.
+2. Compute the rolling window of the price over a week.
+
+<details>
+<summary>solution</summary>
+
+```python
+
+```
+</details>
+
+## Kata 13: Joins
+
+1. Load the weather data csv. Pay attention to the headers!
+2. Cast the data types to a proper format.
+2. Join the weather on the pickup time column. Use the hour as the join key.
+
+<details>
+<summary>solution</summary>
+
+```python
+
+```
+</details>
+
+## Kata 14: Join-asof
+
+Repeat the join above but use the join-asof.
+
+<details>
+<summary>solution</summary>
+
+```python
+
+```
+</details>
+
