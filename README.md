@@ -37,7 +37,9 @@ pdm install
 pdm install -G ide
 ```
 
-3. Launch an IDE, a REPL or a Jupyter notebook to run the katas. Execute the following cell to import Polars and a list of URLs that contain the data. We'll use the NYC Taxi dataset. We can get the links of the data from February to September 2023 only, since they have the same format. The source is [here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+3. Launch an IDE, a REPL or a Jupyter notebook to run the katas. Execute the following cell to import Polars and a list of URLs that contain the data. We'll use the NYC Taxi dataset. We can get the links of the data from February to September 2023 only, since they have the same format. The source is [here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).  
+   For example you can download directly an example of the dataset for 2023 [here](https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-02.parquet)  
+   **Alternative**: launch the scripts inside `downloader` folder to download the data `taxi-download.py` to automatically download the data inside the `data` folder.
 
 ```python
 import polars as pl
@@ -122,10 +124,14 @@ hourly_dataframe = pl.DataFrame(data = hourly_data)
 
 </details>
 
+## Small examples
+
+Inside the folder `notebooks` you can find some examples and guides on how to use Polars with the data you have downloade.
+
 ## Kata 1: Eager Mode
 
-* Read the first parquet file in the list using `pl.read_parquet`.
-* Display the top five rows.
+- Read the first parquet file in the list using `pl.read_parquet`.
+- Display the top five rows.
 
 How long does this take?
 
@@ -139,6 +145,7 @@ url = urls[0]
 
 pl.read_parquet(url).head()
 ```
+
 </details>
 
 ## Kata 2: Lazy mode
@@ -155,6 +162,7 @@ pl.scan_parquet(url).head().collect()
 
 pl.scan_parquet(urls).head()
 ```
+
 </details>
 
 ## Kata 3: The schema
@@ -171,6 +179,7 @@ data = pl.scan_parquet(urls)
 
 data.schema
 ```
+
 </details>
 
 ## Kata 4: Selecting columns
@@ -182,8 +191,8 @@ Use `pl.select()` context to get the following columns:
 3. Select all columns that contain `amount` in their name
 4. Select all `Int64` columns.
 5. Select all `Int64` and `Int32` columns.
-5. Select all numeric columns.
-6. Select all datetime and string columns, minus the first column.
+6. Select all numeric columns.
+7. Select all datetime and string columns, minus the first column.
 
 > **Hint**. To inspect the intermediate steps or results of a query, you can always call the `fetch()` method. It is like a debug statement.
 
@@ -207,6 +216,7 @@ data.select(pl.col(pl.NUMERIC_DTYPES))
 # 6. Select all datetime and string columns.
 data.select(pl.col(pl.DateTime), pl.col(pl.Utf8))
 ```
+
 </details>
 
 ## Kata 5: Column Selectors
@@ -244,6 +254,7 @@ data.select(cs.integer() - cs.first() | cs.temporal())
 # 8. Select all columns that contain an "ID" or "amount" and are not floating point numbers.
 data.select(cs.contains(("ID", "Amount")) | ~cs.float())
 ```
+
 </details>
 
 ## Kata 6: Introduction to expressions
@@ -279,15 +290,16 @@ data.with_columns(pl.col("passenger_count").value_counts())
 # 6. Get the unique values of `VendorID` and `RatecodeID`.
 data.with_columns(pl.col("VendorID", "RatecodeID").n_unique())
 ```
+
 </details>
 
 ## Kata 7: The query plan
 
-The `LazyFrame` represents a *Logical Plan*, i.e. a sequence of transformations. It embodies a query, rather than a `DataFrame`. You can inspect this plan when you print the `repr` of the `LazyFrame`.
+The `LazyFrame` represents a _Logical Plan_, i.e. a sequence of transformations. It embodies a query, rather than a `DataFrame`. You can inspect this plan when you print the `repr` of the `LazyFrame`.
 
-* What method does it suggest to call, to inspect the optimized plan?
-* Inspect the plan of the last exercise of the previous kata, comparing the optimised and unoptimised queries.
-* If you have `graphviz` on your `$PATH`, do the same with `data.show_graph`.
+- What method does it suggest to call, to inspect the optimized plan?
+- Inspect the plan of the last exercise of the previous kata, comparing the optimised and unoptimised queries.
+- If you have `graphviz` on your `$PATH`, do the same with `data.show_graph`.
 
 <details>
 <summary>🔎 Solution</summary>
@@ -297,6 +309,7 @@ percentage_change = pl.col("tip", "mta_tax", "fare_amount").truediv("total_amoun
 data.with_columns(percentage_change).explain(optimized=True)
 data.with_columns(percentage_change).explain(optimized=True)
 ```
+
 </details>
 
 ## Kata 8: Chaining multiple contextes
@@ -316,6 +329,7 @@ data.with_columns(
     pl.col("tip_amount", "total_fees", "mta_tax", "fare_amount").truediv(pl.col("total_amount")).name.suffix("_pct")
 ).explain()
 ```
+
 </details>
 
 ## Kata 9: Data types
@@ -336,6 +350,7 @@ data.select(
     cs.numeric().shrink_dtype()
 )
 ```
+
 </details>
 
 ## Kata 10: Namespaces
@@ -345,11 +360,11 @@ Polars segregates operations on similar data types behind namespaces, e.g. `str`
 1. Cast the `store_and_fwd_flag` column to lowercase.
 2. Extract the year, month and day of the temporal columns.
 3. Cast the temporal columns to strings.
-  1. Split them at the ` ` (space) mark
-  2. Take the first element
-  3. Split the element at the `-` mark.
-  4. Cast the result into a struct.
-  5. Cast the struct into a JSON string with.
+4. Split them at the ` ` (space) mark
+5. Take the first element
+6. Split the element at the `-` mark.
+7. Cast the result into a struct.
+8. Cast the struct into a JSON string with.
 
 <details>
 <summary>solution</summary>
@@ -365,6 +380,7 @@ data.select(
     .struct.json_encode()
 ).fetch()
 ```
+
 </details>
 
 ## Kata 10: Filtering
@@ -375,7 +391,7 @@ Filtering is done inside the `filter` context and uses basic Python logical oper
 
 1. Passenger count is greater than 3.
 2. The dropoff hour is the same as the pickup's.
-2. Trip distance is greater than the average trip distance.
+3. Trip distance is greater than the average trip distance.
 
 <details>
 <summary>solution</summary>
@@ -383,6 +399,7 @@ Filtering is done inside the `filter` context and uses basic Python logical oper
 ```python
 
 ```
+
 </details>
 
 ## Kata 11: Aggregations
@@ -400,6 +417,7 @@ Aggregations with `group_by` can be elegantly expressed in Polars. An aggregatio
 ```python
 
 ```
+
 </details>
 
 ## Kata 12: Window Functions
@@ -417,13 +435,14 @@ Window functions are just computed as this: `pl.col(...).mean().over(...)`. They
 ```python
 
 ```
+
 </details>
 
 ## Kata 13: Joins
 
 1. Load the weather data csv. Pay attention to the headers!
 2. Cast the data types to a proper format.
-2. Join the weather on the pickup time column. Use the hour as the join key.
+3. Join the weather on the pickup time column. Use the hour as the join key.
 
 <details>
 <summary>solution</summary>
@@ -431,6 +450,7 @@ Window functions are just computed as this: `pl.col(...).mean().over(...)`. They
 ```python
 
 ```
+
 </details>
 
 ## Kata 14: Join-asof
@@ -443,6 +463,7 @@ Repeat the join above but use the join-asof.
 ```python
 
 ```
+
 </details>
 
 ## Kata 15: Manipulating the elements of a list
@@ -462,5 +483,5 @@ Aggregate the data by vendor and passenger count on trip distance and fare amoun
     )
 )
 ```
-</details>
 
+</details>
