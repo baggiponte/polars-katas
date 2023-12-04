@@ -1,7 +1,7 @@
 [project]
-name = ""
-version = ""
-description = ""
+name = "polars-katas"
+version = "v0.0.1"
+description = "Polars Katas examples"
 authors = [
     {name = "baggiponte", email = "57922983+baggiponte@users.noreply.github.com"},
 ]
@@ -10,6 +10,11 @@ readme = "README.md"
 license = {text = "MIT"}
 dependencies = [
     "polars>=0.19.17",
+    "openmeteo-requests>=1.1.0",
+    "requests-cache>=1.1.1",
+    "retry-requests>=2.0.0",
+    "pandas>=2.1.3",
+    "duckdb>=0.9.2",
 ]
 
 [project.optional-dependencies]
@@ -19,3 +24,8 @@ ide = [
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ruff>=0.1.6",
+]
