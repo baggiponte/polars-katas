@@ -172,7 +172,7 @@ data.select(cs.contains(("ID", "Amount")) | ~cs.float())
 ```
 </details>
 
-### Kata 6: Introduction to expressions
+## Kata 6: Introduction to expressions
 
 We already used expressions, such as `pl.col()` or `pl.all()`. These operations, that start with `pl.`, can only be evaluated inside a context.
 Outside of one, they can be assigned to a variable or be used as return value of a function and still retain all query optimisations.
@@ -198,7 +198,7 @@ data.with_columns(pl.col("tip", "mta_tax", "fare_amount").truediv("total_amount"
 ```
 </details>
 
-### Kata 7: The query plan
+## Kata 7: The query plan
 
 The `LazyFrame` represents a *Logical Plan*, i.e. a sequence of transformations. It embodies a query, rather than a `DataFrame`. You can inspect this plan when you print the `repr` of the `LazyFrame`.
 
@@ -216,7 +216,7 @@ data.with_columns(percentage_change).explain(optimized=True)
 ```
 </details>
 
-### Kata 8: Chaining multiple contextes
+## Kata 8: Chaining multiple contextes
 
 Try to write the expressions in the sixth kata in the same `with_column` context. Do you notice any errors popping up? Can you explain them?
 
