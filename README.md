@@ -206,7 +206,7 @@ data = pl.scan_parquet(urls)
 data.select(pl.all())
 data.select("*")
 # 2. Select all columns except `VendorID`.
-data.select(pl.all().except("VendorID"))
+data.select(pl.all().exclude("VendorID"))
 # 3. Select all columns that contain `amount` in their name
 data.select(pl.col(r"^*amount$"))
 # 4. Select all integer columns.
