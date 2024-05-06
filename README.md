@@ -39,8 +39,8 @@ python -m pip install -- ".[data]"
 python -m pip install -- ".[ide]"
 ```
 
-> **Note**
-> You can also install the libraries with any modern Python package management tool, such as [`pdm`](https://pdm-project.org/latest/#recommended-installation-method), [`rye`](https://rye-up.com/), [`hatch`](https://hatch.pypa.io/latest/install/) or any other PEP-517 PEP-518 compliant package manger (basically, not `poetry`).
+> [!TIP]
+You can also install the libraries with any modern Python package management tool, such as [`pdm`](https://pdm-project.org/latest/#recommended-installation-method), [`rye`](https://rye-up.com/), [`hatch`](https://hatch.pypa.io/latest/install/) or any other PEP-517 PEP-518 compliant package manger (basically, not `poetry`).
 
 2. Launch an IDE, a REPL or a Jupyter notebook to run the katas. For example:
 
@@ -49,3 +49,6 @@ python -m jupyter lab
 ```
 
 The notebooks are under the `notebooks` directory.
+
+> [!IMPORTANT]
+If you would need a thorough introduction to Polars' internals, you should have a look [here](https://baggiponte.github.io/pbg-polars/1)
