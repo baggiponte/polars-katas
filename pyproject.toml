@@ -20,6 +20,9 @@ ide = [
     "jupyterlab>=4.2.0",
     "nbstripout>=0.7.1",
 ]
+dev = [
+    "pre-commit>=3.7.0",
+]
 
 [tool.rye]
 managed = true
