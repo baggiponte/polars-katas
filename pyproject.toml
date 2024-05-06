@@ -1,7 +1,7 @@
 [project]
-name = ""
-version = ""
-description = ""
+name = "polars-katas"
+version = "0.1.0"
+description = "Code katas to learn Polars"
 authors = [
     {name = "baggiponte", email = "57922983+baggiponte@users.noreply.github.com"},
 ]
@@ -9,13 +9,19 @@ requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 dependencies = [
-    "polars>=0.19.17",
+    "polars>=0.20.23",
 ]
 
 [project.optional-dependencies]
-ide = [
-    "jupyterlab>=4.0.9",
+data = [
+    "httpx>=0.27.0",
 ]
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+ide = [
+    "jupyterlab>=4.2.0",
+    "nbstripout>=0.7.1",
+]
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
