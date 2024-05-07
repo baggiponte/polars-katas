@@ -28,3 +28,6 @@ dev = [
 managed = true
 dev-dependencies = []
 
+[tool.ruff]
+extend-include = ["*.ipynb"]
+
